@@ -19,6 +19,7 @@ public class Restaurant {
     private String address;
     private String rs_num;
     private String category;
+    private String introduction;
     private String rs_info;
 
 }

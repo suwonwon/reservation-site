@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Data
@@ -18,5 +19,9 @@ public class Reservation {
     private int rm_id;
     private int rs_id;
     private String request;
+
+    private String people;
+    private Date create_date;
+
 
 }
