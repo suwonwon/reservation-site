@@ -1,4 +1,4 @@
-package com.reservation.dto;
+package com.reservation.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,16 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
 @Data
+@Table(name = "board")
 public class Board {
-
-    //private int p_id;
-    //private int m_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int p_id;
+    private int m_id;
     private String title;
     private String contents;
-    //private Date create_date;
-    //private Date modify_date;
-    //private Date delete_date;
-    //private Date is_delete;
+    private String role;
+    private Date create_date;
+    private Date modify_date;
+    private Date delete_date;
+    private Date is_delete;
+
 
 }

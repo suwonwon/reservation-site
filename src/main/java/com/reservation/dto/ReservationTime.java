@@ -8,13 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import java.util.Date;
-@Entity
+
 @Data
-@Table(name = "reservation_time")
 public class ReservationTime {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int re_t_id;
-    private int rs_id;
+    //private int re_t_id;
+    //private int rs_id;
     private Date reservation;
 }

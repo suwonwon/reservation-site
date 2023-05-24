@@ -1,4 +1,4 @@
-package com.reservation.dto;
+package com.reservation.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -8,10 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-
+@Entity
 @Data
+@Table(name = "restaurant")
 public class Restaurant {
-    //private int rs_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int rs_id;
+    private int m_id;
     private String rs_name;
     private String address;
     private String rs_num;
