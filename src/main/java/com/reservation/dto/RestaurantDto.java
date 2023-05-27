@@ -1,16 +1,10 @@
 package com.reservation.dto;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
 
 
 @Data
-public class Restaurant {
+public class RestaurantDto {
     //private int rs_id;
     private String rs_name;
     private String address;
