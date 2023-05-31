@@ -3,6 +3,6 @@ package com.reservation.controller;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@RequestMapping("/mypage")
+@RequestMapping(value ="/mypage")
 public class MypageController {
 }
