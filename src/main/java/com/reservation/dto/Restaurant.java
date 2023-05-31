@@ -8,12 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-@Entity
+
 @Data
-@Table(name = "restaurant")
 public class Restaurant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int rs_id;
     private String rs_name;
     private String address;
