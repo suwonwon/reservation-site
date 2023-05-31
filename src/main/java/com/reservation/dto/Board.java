@@ -12,12 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
+
 @Data
-@Table(name = "board")
 public class Board {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int p_id;
     private int m_id;
     private String title;
