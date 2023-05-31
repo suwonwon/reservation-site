@@ -4,6 +4,6 @@ package com.reservation.controller;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping(value ="/member")
 public class MemberController {
 }
