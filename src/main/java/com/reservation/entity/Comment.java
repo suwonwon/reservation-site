@@ -11,13 +11,17 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int c_id;
-    private int m_id;
-    private int p_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member m_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Board p_id;
     private String comment;
     private Date create_date;
     private Date modify_date;
     private Date delete_date;
-    private Date is_delete;
+    private String is_delete;
 
 }
 

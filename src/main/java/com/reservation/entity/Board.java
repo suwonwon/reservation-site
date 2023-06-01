@@ -1,5 +1,6 @@
 package com.reservation.entity;
 
+import com.reservation.constant.Role;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,10 +13,12 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int p_id;
-    private int m_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member m_id;
     private String title;
     private String contents;
-    private String role;
+    private Role role;
     private Date create_date;
     private Date modify_date;
     private Date delete_date;

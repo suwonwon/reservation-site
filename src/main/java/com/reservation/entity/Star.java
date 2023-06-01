@@ -1,5 +1,6 @@
 package com.reservation.entity;
 
+import com.reservation.constant.Role;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,11 @@ public class Star {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int s_id;
-    private int m_id;
-    private int rs_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member m_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Restaurant rs_id;
+    private Boolean isStar;
 
 }
