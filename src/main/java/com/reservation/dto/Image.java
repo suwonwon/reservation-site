@@ -1,9 +1,6 @@
 package com.reservation.dto;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
@@ -12,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Image {
 
     private int img_id;

@@ -1,6 +1,8 @@
 package com.reservation.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
@@ -10,6 +12,8 @@ import javax.persistence.Table;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Restaurant {
 
     private int rs_id;
