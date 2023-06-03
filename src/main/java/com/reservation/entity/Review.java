@@ -11,8 +11,12 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int r_id;
-    private int rs_id;
-    private int m_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Restaurant rs_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member m_id;
     private String contents;
     private String scope;
 }
