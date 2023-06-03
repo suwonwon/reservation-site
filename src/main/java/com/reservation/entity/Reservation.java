@@ -21,13 +21,10 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     private Restaurant re_restaurant;
 
-
-
     private String request;
 
     private String people;
     private Date create_date;
-    private Date time;
     private ReservationStatus reservationStatus;
 
 

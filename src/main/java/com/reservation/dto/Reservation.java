@@ -17,7 +17,6 @@ public class Reservation {
     private String request;
     private String people;
     private Date create_date;
-    private Date time;
     private String role;
 
 
