@@ -10,6 +10,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     List<Reservation> findAll();
 
-    List<Reservation> findById(int id);
+    List<Reservation> findByRsid(int Rs_id);
 
 }

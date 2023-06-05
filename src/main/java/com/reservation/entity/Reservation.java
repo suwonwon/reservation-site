@@ -14,6 +14,9 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int re_id;
+    private int m_id;
+    @Column(name = "rs_id")
+    private int rsid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member re_member;

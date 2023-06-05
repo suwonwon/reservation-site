@@ -110,12 +110,19 @@
         }
     </style>
 
-    <script>
+    <script th:inline = "javascript">
         window.onload = function () { buildCalendar(); }    // 웹 페이지가 로드되면 buildCalendar 실행
 
         let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
         let today = new Date();     // 페이지를 로드한 날짜를 저장
         today.setHours(0,0,0,0);    // 비교 편의를 위해 today의 시간을 초기화
+        var data = [[${time}]];
+
+    // 자바스크립트 함수
+     function asd() {
+      // 데이터 조작 또는 추가 동작 수행
+      console.log(data);
+    }
 
         // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
         function buildCalendar() {
@@ -179,10 +186,12 @@
 
             var button = document.createElement("button");
             var myValue = /*[[${myValue}]]*/ '';
-            button.innerText = "선택한 날짜: " + nowColumn.innerText;
+            var currentMonth = nowMonth.getMonth()+1;
+            button.innerText = currentMonth+"월" +nowColumn.innerText + "일";
+
             button.onclick = function() {
                 // 버튼 클릭 시 동작
-                alert("선택한 날짜: " + nowColumn.innerText);
+
     };
 
     buttonContainer.appendChild(button);
@@ -207,8 +216,9 @@
             }
             return value;
         }
-    </script>
 
+
+    </script>
     <div class="section">
       <div class="container">
         <div class="row justify-content-between">
@@ -245,7 +255,6 @@
           <div class="col-lg-4">
               <h1>요청사항</h1>
               <!-- 컨트롤러에서 넘어온값 -->
-              <h3 th:text ="${time}"></h3>
               <textarea  style="width: 400px; height: 400px;" ></textarea>
               <div class="text">
                 <button type="submit" style="width: 400px; height: 100px;" >예약하기</button>
