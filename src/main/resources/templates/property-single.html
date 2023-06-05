@@ -5,7 +5,7 @@
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -95,8 +95,8 @@
   <div class="container">
     <div class="row justify-content-center align-items-center">
       <div class="col-lg-9 text-center mt-5">
-        <h1 class="heading" data-aos="fade-up">
-          5232 California AVE. 21BC
+        <h1 th:text="${restaurantDetail.rs_name}" class="heading" data-aos="fade-up">
+          aa
         </h1>
 
         <nav
@@ -112,8 +112,9 @@
             <li
                     class="breadcrumb-item active text-white-50"
                     aria-current="page"
+                    th:text="${restaurantDetail.rs_name}"
             >
-              5232 California AVE. 21BC
+              aa
             </li>
           </ol>
         </nav>
@@ -135,14 +136,12 @@
         </div>
       </div>
       <div class="col-lg-5">
-        <h2 class="heading text-primary">5232 California Ave. 21BC</h2>
-        <p class="meta">California, United States</p>
-        <p class="text-black-50">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
-          laborum quo quos omnis sed magnam id, ducimus saepe, debitis error
-          earum, iste dicta odio est sint dolorem magni animi tenetur.
+        <h2 class="heading text-primary" th:text="${restaurantDetail.rs_name}">aa</h2>
+        <p class="meta" th:text="${restaurantDetail.address}">ddd</p>
+        <p class="text-black-50" th:text="${restaurantDetail.introduction}">
+          Lorem ipsum dolor sit amet consectetur, ad
         </p>
-        <p class="text-black-50">
+        <p class="text-black-50" th:text="${restaurantDetail.rs_info}">
           Perferendis eligendi reprehenderit, assumenda molestias nisi eius
           asdsadsadsadsadasdsadsadsadsa
           asdsaPerferendis eligendi reprehenderit, assumenda molestias nisi eius
@@ -317,8 +316,10 @@
 
   var map = new kakao.maps.Map(container, options);
   function setInnerHome() {
+
+    var currentUrl = window.location.href;
     $.ajax({
-      url: '/restaurant/detail/test/home',
+      url: currentUrl+ '/home',
       method: 'GET',
       success: function(response) {
         const element = document.getElementById('content');
@@ -330,8 +331,9 @@
     });
   }
   function setInnerMenu() {
+    var currentUrl = window.location.href;
     $.ajax({
-      url: '/restaurant/detail/test/menu',
+      url: currentUrl+ '/menu',
       method: 'GET',
       success: function(response) {
         const element = document.getElementById('content');
@@ -343,8 +345,9 @@
     });
   }
   function setInnerPhoto() {
+    var currentUrl = window.location.href;
     $.ajax({
-      url: '/restaurant/detail/test/photo',
+      url: currentUrl+ '/photo',
       method: 'GET',
       success: function(response) {
         const element = document.getElementById('content');
@@ -356,8 +359,9 @@
     });
   }
   function setInnerReview() {
+    var currentUrl = window.location.href;
     $.ajax({
-      url: '/restaurant/detail/test/review',
+      url: currentUrl+ '/review',
       method: 'GET',
       success: function(response) {
         const element = document.getElementById('content');
