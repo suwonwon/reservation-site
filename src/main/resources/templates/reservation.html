@@ -116,13 +116,9 @@
         let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
         let today = new Date();     // 페이지를 로드한 날짜를 저장
         today.setHours(0,0,0,0);    // 비교 편의를 위해 today의 시간을 초기화
-        var data = [[${time}]];
+        var dataList = [[${time}]];
 
-    // 자바스크립트 함수
-     function asd() {
-      // 데이터 조작 또는 추가 동작 수행
-      console.log(data);
-    }
+
 
         // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
         function buildCalendar() {
@@ -183,19 +179,37 @@
 
             var buttonContainer = document.getElementById("buttonContainer");
             buttonContainer.innerHTML = ""; // 기존 버튼 초기화
-
             var button = document.createElement("button");
-            var myValue = /*[[${myValue}]]*/ '';
             var currentMonth = nowMonth.getMonth()+1;
-            button.innerText = currentMonth+"월" +nowColumn.innerText + "일";
+            var currentYear = nowMonth.getFullYear();
+            button.innerText =currentYear +"년" +currentMonth+"월" +nowColumn.innerText + "일" ;
 
-            button.onclick = function() {
-                // 버튼 클릭 시 동작
-
-    };
-
+         for (var hour = 10; hour < 19; hour++) {
+           var button = document.createElement("button");
+            button.innerText = hour+"시";
+         button.onclick = function () {
+            for (var i = 0; i < dataList.length; i++) {
+                var data = dataList[i];
+                var key1 = "년";
+                var value1 = data[key1];
+                var key2 = "월";
+                var value2 = data[key2];
+                var key3 = "일";
+                var value3 = data[key3];
+                var key4 = "시";
+                var value4 = data[key4];
+            if (value1 == currentYear && value2 == currentMonth && value3 == nowColumn.innerText ){
+            console.log("예약이있어서 예약불가");
+            isDataAvailable = true; // 데이터가 있을 경우 플래그를 true로 설정
+            break;  // 데이터가 존재하는 경우 반복문 종료
+            console.log("입장");
+            console.log(value1 + "년 " + value2 + "월 " + value3 + "일 " + value4 + "시");
+                  }
+            }
+         };
     buttonContainer.appendChild(button);
         }
+    }
 
         // 이전달 버튼 클릭
         function prevCalendar() {
@@ -210,10 +224,7 @@
 
         // input값이 한자리 숫자인 경우 앞에 '0' 붙혀주는 함수
         function leftPad(value) {
-            if (value < 10) {
-                value = "0" + value;
-                return value;
-            }
+
             return value;
         }
 
@@ -249,8 +260,6 @@
               </tbody>
             </table>
             <div id="buttonContainer"></div>
-
-
           </div>
           <div class="col-lg-4">
               <h1>요청사항</h1>
@@ -258,6 +267,7 @@
               <textarea  style="width: 400px; height: 400px;" ></textarea>
               <div class="text">
                 <button type="submit" style="width: 400px; height: 100px;" >예약하기</button>
+
             </div>
           </div>
         </div>

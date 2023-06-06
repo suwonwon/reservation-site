@@ -5,9 +5,11 @@ import com.reservation.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
+@Transactional
 public class ReservationService {
 
     @Autowired
@@ -23,9 +25,10 @@ public class ReservationService {
         List<HashMap<String, Integer>> asd = new ArrayList<>();
         for (int i=0;i<re.size(); i++){
             HashMap<String,Integer> ss= new HashMap<>();
+            ss.put("년",re.get(i).getCreate_date().getYear()+1900);
             ss.put("월",re.get(i).getCreate_date().getMonth()+1);
             ss.put("일",re.get(i).getCreate_date().getDay());
-            ss.put("시간",re.get(i).getCreate_date().getHours());
+            ss.put("시",re.get(i).getCreate_date().getHours());
             asd.add(ss);
         }
         return asd;
