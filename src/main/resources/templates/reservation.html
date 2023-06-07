@@ -17,8 +17,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css" />
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+    <link rel="stylesheet" href="/fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css" />
 
     <link rel="stylesheet" href="/css/tiny-slider.css" />
     <link rel="stylesheet" href="/css/aos.css" />
@@ -42,7 +42,7 @@
 
     <div
       class="hero page-inner overlay"
-      style="background-image: url('images/hero_bg_3.jpg')"
+      style="background-image: url('/images/hero_bg_3.jpg')"
     >
       <div class="container">
         <div class="row justify-content-center align-items-center">
@@ -185,31 +185,49 @@
             button.innerText =currentYear +"년" +currentMonth+"월" +nowColumn.innerText + "일" ;
 
          for (var hour = 10; hour < 19; hour++) {
-           var button = document.createElement("button");
-            button.innerText = hour+"시";
-         button.onclick = function () {
-            for (var i = 0; i < dataList.length; i++) {
-                var data = dataList[i];
-                var key1 = "년";
-                var value1 = data[key1];
-                var key2 = "월";
-                var value2 = data[key2];
-                var key3 = "일";
-                var value3 = data[key3];
-                var key4 = "시";
-                var value4 = data[key4];
-            if (value1 == currentYear && value2 == currentMonth && value3 == nowColumn.innerText ){
-            console.log("예약이있어서 예약불가");
-            isDataAvailable = true; // 데이터가 있을 경우 플래그를 true로 설정
-            break;  // 데이터가 존재하는 경우 반복문 종료
-            console.log("입장");
-            console.log(value1 + "년 " + value2 + "월 " + value3 + "일 " + value4 + "시");
-                  }
-            }
-         };
-    buttonContainer.appendChild(button);
+            createButton(hour);
+          }
+
+        function createButton(hour) {
+            var button = document.createElement("button");
+            button.innerText = formatTime(hour); // 시간 값을 포맷팅하여 버튼의 텍스트로 설정
+            button.id = hour.toString(); // 버튼에 ID로 시간 값 설정
+            button.onclick = function () {
+            var buttonHour = parseInt(this.id); // 버튼의 시간 값 가져오기
+
+                for (var i = 0; i < dataList.length; i++) {
+                    var data = dataList[i];
+                    var key1 = "년";
+                    var value1 = data[key1];
+                    var key2 = "월";
+                    var value2 = data[key2];
+                    var key3 = "일";
+                    var value3 = data[key3];
+                    var key4 = "시";
+                    var value4 = data[key4];
+
+                    if (value1 == currentYear && value2 == currentMonth && value3 == nowColumn.innerText) {
+                        if (value4 === buttonHour) {
+                            console.log(buttonHour + "시는 예약할 수 없습니다.");
+                             button.disabled = true;
+                        } else {
+                            console.log(buttonHour + "시 예약 가능");
+                            console.log(value1 + "년 " + value2 + "월 " + value3 + "일 " + value4 + "시");
+                            // 예약 가능한 경우의 동작 코드
+                        }
+                        break;
+                    }
+                }
+            };
+            buttonContainer.appendChild(button);
+        }
+        function formatTime(hour) {
+        var formattedHour = hour < 10 ? "0" + hour : hour;
+        return formattedHour + ":00";
         }
     }
+
+
 
         // 이전달 버튼 클릭
         function prevCalendar() {
@@ -224,7 +242,6 @@
 
         // input값이 한자리 숫자인 경우 앞에 '0' 붙혀주는 함수
         function leftPad(value) {
-
             return value;
         }
 

@@ -27,7 +27,7 @@ public class ReservationService {
             HashMap<String,Integer> ss= new HashMap<>();
             ss.put("년",re.get(i).getCreate_date().getYear()+1900);
             ss.put("월",re.get(i).getCreate_date().getMonth()+1);
-            ss.put("일",re.get(i).getCreate_date().getDay());
+            ss.put("일",re.get(i).getCreate_date().getDate());
             ss.put("시",re.get(i).getCreate_date().getHours());
             asd.add(ss);
         }
