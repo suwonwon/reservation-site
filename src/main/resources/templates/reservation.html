@@ -116,7 +116,7 @@
         let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
         let today = new Date();     // 페이지를 로드한 날짜를 저장
         today.setHours(0,0,0,0);    // 비교 편의를 위해 today의 시간을 초기화
-        var dataList = [[${time}]];
+        var id = [[${id}]];
 
 
 
@@ -193,7 +193,7 @@
             button.innerText = formatTime(hour); // 시간 값을 포맷팅하여 버튼의 텍스트로 설정
             button.id = hour.toString(); // 버튼에 ID로 시간 값 설정
             button.onclick = function () {
-                 var buttonHour = parseInt(this.id);
+            var buttonHour = parseInt(this.id);
 
         // AJAX 통신
         var xhr = new XMLHttpRequest();
@@ -202,8 +202,14 @@
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-              // 성공적으로 응답을 받았을 때의 처리
-              console.log("성공");
+              var response = parseInt(xhr.responseText);
+              if (response === 0) {
+                console.log("예약가능");
+                button.disabled = false; // 예약 가능한 경우 버튼 활성화
+              } else {
+                console.log("예약불가능");
+                button.disabled = true; // 예약 불가능한 경우 버튼 비활성화
+              }
             } else {
               // 응답을 받지 못했거나 오류가 발생한 경우의 처리
               console.error("Request failed. Status: " + xhr.status);
@@ -213,6 +219,7 @@
 
         // 전송할 데이터 구성
         var data = {
+          id: id,
           year: currentYear,
           month: currentMonth,
           day: nowColumn.innerText,
@@ -280,13 +287,13 @@
             </table>
             <div id="buttonContainer"></div>
           </div>
+
           <div class="col-lg-4">
               <h1>요청사항</h1>
               <!-- 컨트롤러에서 넘어온값 -->
               <textarea  style="width: 400px; height: 400px;" ></textarea>
               <div class="text">
                 <button type="submit" style="width: 400px; height: 100px;" >예약하기</button>
-
             </div>
           </div>
         </div>

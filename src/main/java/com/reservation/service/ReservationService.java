@@ -46,6 +46,7 @@ public class ReservationService {
 
         int status=0;
 
+        int id=datedto.getId();
         int year = datedto.getYear();
         int month = datedto.getMonth();
         int day = datedto.getDay();
@@ -63,7 +64,7 @@ public class ReservationService {
         // LocalDateTime을 java.util.Date로 변환
         Date date = Date.from(parsedDatetime.atZone(ZoneId.systemDefault()).toInstant());
 
-        String result = reservationRepository.executeQuery(date);
+        String result = reservationRepository.executeQuery(date,id);
 
         if (result!=null){
             status=1;

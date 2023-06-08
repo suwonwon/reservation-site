@@ -21,21 +21,14 @@ public class ReservationController {
 
     @RequestMapping(value ="restaurant/{id}/reservation.html" ,method = RequestMethod.GET)
     public String Home(Model model,@PathVariable int id){
-        List<HashMap<String, Integer>> rs_id=  reservationService.findByRsid(id);
-        model.addAttribute("time" , rs_id);
-        System.out.println(reservationService.findByRsid(id));
+        model.addAttribute("id" , id);
         return "reservation";
     }
 
     @PostMapping("/your-controller-url")
-    public String makeReservation(@RequestBody DateDto datedto) {
-        // 전송된 데이터를 사용하여 예약을 처리하는 로직 수행
-
-        int a = reservationService.makeReservation(datedto);
-        System.out.println(a);
-
-        // 예약 처리 후 응답 반환
-        return "index";
+    @ResponseBody
+    public int makeReservation(@RequestBody DateDto datedto) {
+        return reservationService.makeReservation(datedto);
     }
 
 
