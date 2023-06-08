@@ -193,32 +193,34 @@
             button.innerText = formatTime(hour); // 시간 값을 포맷팅하여 버튼의 텍스트로 설정
             button.id = hour.toString(); // 버튼에 ID로 시간 값 설정
             button.onclick = function () {
-            var buttonHour = parseInt(this.id); // 버튼의 시간 값 가져오기
+                 var buttonHour = parseInt(this.id);
 
-                for (var i = 0; i < dataList.length; i++) {
-                    var data = dataList[i];
-                    var key1 = "년";
-                    var value1 = data[key1];
-                    var key2 = "월";
-                    var value2 = data[key2];
-                    var key3 = "일";
-                    var value3 = data[key3];
-                    var key4 = "시";
-                    var value4 = data[key4];
+        // AJAX 통신
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/your-controller-url", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // 성공적으로 응답을 받았을 때의 처리
+              console.log("성공");
+            } else {
+              // 응답을 받지 못했거나 오류가 발생한 경우의 처리
+              console.error("Request failed. Status: " + xhr.status);
+            }
+          }
+        };
 
-                    if (value1 == currentYear && value2 == currentMonth && value3 == nowColumn.innerText) {
-                        if (value4 === buttonHour) {
-                            console.log(buttonHour + "시는 예약할 수 없습니다.");
-                             button.disabled = true;
-                        } else {
-                            console.log(buttonHour + "시 예약 가능");
-                            console.log(value1 + "년 " + value2 + "월 " + value3 + "일 " + value4 + "시");
-                            // 예약 가능한 경우의 동작 코드
-                        }
-                        break;
-                    }
-                }
-            };
+        // 전송할 데이터 구성
+        var data = {
+          year: currentYear,
+          month: currentMonth,
+          day: nowColumn.innerText,
+          hour: buttonHour,
+        };
+
+        xhr.send(JSON.stringify(data));
+      };
             buttonContainer.appendChild(button);
         }
         function formatTime(hour) {

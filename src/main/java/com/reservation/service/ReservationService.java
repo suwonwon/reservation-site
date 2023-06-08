@@ -1,11 +1,17 @@
 package com.reservation.service;
 
+import com.reservation.dto.DateDto;
 import com.reservation.entity.Reservation;
 import com.reservation.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -32,6 +38,38 @@ public class ReservationService {
             asd.add(ss);
         }
         return asd;
+    }
+
+
+    public int makeReservation(@RequestBody DateDto datedto) {
+        // 전송된 데이터를 사용하여 예약을 처리하는 로직 수행
+
+        int status=0;
+
+        int year = datedto.getYear();
+        int month = datedto.getMonth();
+        int day = datedto.getDay();
+        int hour = datedto.getHour();
+        // LocalDateTime 객체 생성
+        LocalDateTime targetDateTime = LocalDateTime.of(year, month, day, hour, 0, 0);
+
+        // DateTimeFormatter를 사용하여 형식화된 문자열 생성
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDatetime = targetDateTime.format(formatter);
+
+        // formattedDatetime을 LocalDateTime으로 변환하여 쿼리 실행
+        LocalDateTime parsedDatetime = LocalDateTime.parse(formattedDatetime, formatter);
+
+        // LocalDateTime을 java.util.Date로 변환
+        Date date = Date.from(parsedDatetime.atZone(ZoneId.systemDefault()).toInstant());
+
+        String result = reservationRepository.executeQuery(date);
+
+        if (result!=null){
+            status=1;
+        }
+
+        return status;
     }
 
 

@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DateDto {
+    private int year;
     private int month;
-    private int date;
-    private int hours;
+    private int day;
+    private int hour;
+
 }
