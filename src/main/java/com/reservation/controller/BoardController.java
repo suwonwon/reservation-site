@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping(value ="/board")
 public class BoardController {
-    //aaa
+    //aaabb
 }
