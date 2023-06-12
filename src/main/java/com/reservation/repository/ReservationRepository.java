@@ -17,4 +17,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Query("SELECT e.create_date FROM Reservation e WHERE e.create_date = :datetime AND e.rsid = :id")
     String executeQuery(@Param("datetime") Date datetime, @Param("id") int id);
 
+
+
 }

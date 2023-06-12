@@ -1,12 +1,14 @@
 package com.reservation.service;
 
 import com.reservation.dto.DateDto;
+import com.reservation.dto.ReservationFormDto;
 import com.reservation.entity.Reservation;
 import com.reservation.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -71,6 +73,36 @@ public class ReservationService {
         }
 
         return status;
+    }
+
+    public String createReservation(@RequestBody ReservationFormDto formDto) {
+        Reservation rv = new Reservation();
+
+        int year = formDto.getYear();
+        int month = formDto.getMonth();
+        int day = formDto.getDay();
+        int hour = formDto.getHour();
+        // LocalDateTime 객체 생성
+        LocalDateTime targetDateTime = LocalDateTime.of(year, month, day, hour, 0, 0);
+
+        // DateTimeFormatter를 사용하여 형식화된 문자열 생성
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDatetime = targetDateTime.format(formatter);
+
+        // formattedDatetime을 LocalDateTime으로 변환하여 쿼리 실행
+        LocalDateTime parsedDatetime = LocalDateTime.parse(formattedDatetime, formatter);
+
+        // LocalDateTime을 java.util.Date로 변환
+        Date date = Date.from(parsedDatetime.atZone(ZoneId.systemDefault()).toInstant());
+        rv.setRe_id(1);
+        rv.setRsid(formDto.getId());
+        rv.setCreate_date(date);
+        rv.setRequest(formDto.getInputValue());
+        rv.setPeople(formDto.getCount());
+        System.out.println(rv);
+        reservationRepository.save(rv);
+
+        return "index"; // 예약 성공 페이지로 리디렉션
     }
 
 
