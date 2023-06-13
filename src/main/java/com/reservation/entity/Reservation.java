@@ -28,7 +28,7 @@ public class Reservation {
 
     private String people;
     private Date create_date;
-    private ReservationStatus reservationStatus;
+    private int reservation_status;
 
 
 }

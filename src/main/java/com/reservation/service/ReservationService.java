@@ -75,7 +75,7 @@ public class ReservationService {
         return status;
     }
 
-    public String createReservation(@RequestBody ReservationFormDto formDto) {
+    public void createReservation(@RequestBody ReservationFormDto formDto) {
         Reservation rv = new Reservation();
 
         int year = formDto.getYear();
@@ -94,15 +94,13 @@ public class ReservationService {
 
         // LocalDateTime을 java.util.Date로 변환
         Date date = Date.from(parsedDatetime.atZone(ZoneId.systemDefault()).toInstant());
-        rv.setRe_id(1);
+        //rv.setM_id(); 세션추가되면 삽입
         rv.setRsid(formDto.getId());
         rv.setCreate_date(date);
+        rv.setReservation_status(1);
         rv.setRequest(formDto.getInputValue());
         rv.setPeople(formDto.getCount());
-        System.out.println(rv);
         reservationRepository.save(rv);
-
-        return "index"; // 예약 성공 페이지로 리디렉션
     }
 
 

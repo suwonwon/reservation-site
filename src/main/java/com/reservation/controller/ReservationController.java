@@ -27,20 +27,25 @@ public class ReservationController {
         return "reservation";
     }
 
-    @PostMapping("/your-controller-url")
+    @PostMapping("/reservationtime")
     @ResponseBody
     public int makeReservation(@RequestBody DateDto datedto) {
         return reservationService.makeReservation(datedto);
     }
 
     @PostMapping("/reservation/save")
-    public String createReservation(@RequestBody ReservationFormDto formDto) {
-        reservationService.createReservation(formDto);
+    public String  createReservation(@RequestBody ReservationFormDto formDto) {
 
+       reservationService.createReservation(formDto);
 
+       return "index";
 
+    }
 
-        return "index"; // 예약 성공 페이지로 리디렉션
+    @GetMapping("/check")
+    public String check(){
+
+        return "check-reservation";
     }
 
 

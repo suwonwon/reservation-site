@@ -280,7 +280,7 @@
 
         // AJAX 통신
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/your-controller-url", true);
+        xhr.open("POST", "/reservationtime", true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -381,6 +381,7 @@
                   var month = selectedDate.month;
                   var day = selectedDate.day;
                   var hour = selectedDate.hour;
+
                   var inputValue = textArea.value;
 
 
@@ -394,7 +395,7 @@
                       if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
                           // 요청이 성공적으로 처리되었을 때의 동작
-                          console.log('서버 응답:', xhr.responseText);
+                          window.location.href='/';
                         } else {
                           // 요청이 실패했을 때의 동작
                           console.error('요청 실패. 상태 코드:', xhr.status);
