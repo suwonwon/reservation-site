@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Star {
 
     private int s_id;
