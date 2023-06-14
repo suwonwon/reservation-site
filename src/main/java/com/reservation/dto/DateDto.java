@@ -1,9 +1,13 @@
 package com.reservation.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ReservationFormDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class DateDto {
 
     private int id;
     private int year;
@@ -11,6 +15,4 @@ public class ReservationFormDto {
     private int day;
     private int hour;
 
-    private String count;
-    private String inputValue;
 }
