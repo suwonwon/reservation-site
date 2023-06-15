@@ -11,10 +11,10 @@ import java.util.List;
 @Table(name = "member")
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int m_id;
 
-    @OneToMany(mappedBy = "rs_member")
+    @OneToMany(mappedBy = "rs_member",cascade = CascadeType.ALL)
     private List<Restaurant> m_rs;
 
     @OneToMany(mappedBy = "re_member")
@@ -40,6 +40,8 @@ public class Member {
     private String name;
     private String number;
     private String e_mail;
+
+    @Enumerated(EnumType.STRING)
     private Role role;
     private String status;
 
