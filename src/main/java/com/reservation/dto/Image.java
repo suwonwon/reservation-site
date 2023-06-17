@@ -16,4 +16,5 @@ public class Image {
     private int img_id;
     private int rs_id;
     private String img_ad;
+    private String repImgYn; //대표이미지 여부
 }

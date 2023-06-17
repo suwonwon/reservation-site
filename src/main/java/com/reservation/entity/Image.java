@@ -16,4 +16,5 @@ public class Image {
     private Restaurant rs_id;
     private String img_role;
     private String img_ad;
+    private String repImgYn; //대표이미지여부 추가
 }
