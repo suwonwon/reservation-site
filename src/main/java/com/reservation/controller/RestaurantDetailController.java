@@ -2,6 +2,7 @@ package com.reservation.controller;
 
 
 import com.reservation.dto.RestaurantDto;
+import com.reservation.dto.ReviewDto;
 import com.reservation.entity.Restaurant;
 import com.reservation.entity.Review;
 import com.reservation.service.RestaurantService;
@@ -11,10 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -59,11 +57,21 @@ public class RestaurantDetailController {
         Page<Review> reviewPage = reviewService.getAllReviewsForRestaurant(restaurant, pageable);
         model.addAttribute("reviews", reviewPage.getContent());
         model.addAttribute("page", reviewPage);
+        model.addAttribute("restaurantDetail", restaurant);
         return "/restaurant/detail/review";
     }
 
     @PostMapping("/{rs_id}/review")
-    public String review(@PathVariable int rs_id,)
+    public String review(@PathVariable int rs_id, @RequestParam("contents") String contents, @RequestParam("scope") String scope) {
+        Restaurant restaurant = restaurantService.findById(rs_id).get();
+        Review review = new Review();
+
+        review.setRs_id(restaurant);
+        review.setContents(contents);
+        review.setScope(scope);
+        reviewService.save(review);
+        return "redirect:/restaurant/detail/{rs_id}";
+    }
 
 
 }

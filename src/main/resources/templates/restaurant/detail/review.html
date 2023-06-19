@@ -6,8 +6,21 @@
 </head>
 <body>
 <div>
-    <form th:action="@{/review}" method="post">
+    <form th:action="@{/restaurant/detail/{rs_id}/review(rs_id=${restaurantDetail.rs_id})}" method="post">
         <textarea name="contents" placeholder="리뷰를 작성하세요"></textarea>
+        <div class="rating">
+            <input type="radio" id="star5" name="scope" value="5" required>
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="scope" value="4">
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="scope" value="3">
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="scope" value="2">
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="scope" value="1">
+            <label for="star1"></label>
+        </div>
+
         <button type="submit">작성</button>
     </form>
     <table class="table">
@@ -20,7 +33,7 @@
         <tbody>
         <tr th:each="review : ${reviews}">
             <td style="width: 80%" th:text="${review.contents}">리뷰</td>
-            <td th:text="${review.m_id.getName()}">작성자</td>
+<!--            <td th:text="${review.m_id.getName()}">작성자</td>-->
         </tr>
         </tbody>
 
