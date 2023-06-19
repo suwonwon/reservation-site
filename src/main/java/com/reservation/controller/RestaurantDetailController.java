@@ -68,7 +68,7 @@ public class RestaurantDetailController {
 
         review.setRs_id(restaurant);
         review.setContents(contents);
-        review.setScope(scope);
+        review.setScope(Integer.parseInt(scope));
         reviewService.save(review);
         return "redirect:/restaurant/detail/{rs_id}";
     }

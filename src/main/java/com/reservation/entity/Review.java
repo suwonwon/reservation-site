@@ -18,5 +18,5 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member m_id;
     private String contents;
-    private String scope;
+    private int scope;
 }
