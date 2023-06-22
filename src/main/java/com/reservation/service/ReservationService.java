@@ -2,13 +2,15 @@ package com.reservation.service;
 
 import com.reservation.dto.DateDto;
 import com.reservation.dto.ReservationFormDto;
+import com.reservation.dto.findReDto;
 import com.reservation.entity.Reservation;
+import com.reservation.entity.Restaurant;
 import com.reservation.repository.ReservationRepository;
+import com.reservation.repository.ReservationRepositoryImpl;
+import com.reservation.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -23,13 +25,14 @@ public class ReservationService {
     @Autowired
     ReservationRepository reservationRepository;
 
-    public List<Reservation> findAll(){
-        List<Reservation> re = reservationRepository.findAll();
-        return reservationRepository.findAll();
-    }
+    @Autowired
+    RestaurantRepository restaurantRepository;
+    @Autowired
+    ReservationRepositoryImpl repository;
+
     //넘어온 식당id를 가지고 해당날짜와 시간대에 예약이있나 확인하는 서비스
     public List<HashMap<String, Integer>> findByRsid(int id){
-        List<Reservation> re = reservationRepository.findByRsid(id);
+        List<Reservation> re = reservationRepository.findByRsId(id);
         List<HashMap<String, Integer>> asd = new ArrayList<>();
         for (int i=0;i<re.size(); i++){
             HashMap<String,Integer> ss= new HashMap<>();
@@ -43,7 +46,7 @@ public class ReservationService {
     }
 
 
-    public int makeReservation(@RequestBody DateDto datedto) {
+    public int findTime(@RequestBody DateDto datedto) {
         // 전송된 데이터를 사용하여 예약을 처리하는 로직 수행
 
         int status=0;
@@ -66,7 +69,7 @@ public class ReservationService {
         // LocalDateTime을 java.util.Date로 변환
         Date date = Date.from(parsedDatetime.atZone(ZoneId.systemDefault()).toInstant());
 
-        String result = reservationRepository.executeQuery(date,id);
+        String result = reservationRepository.findTime(date,id);
 
         if (result!=null){
             status=1;
@@ -76,7 +79,14 @@ public class ReservationService {
     }
 
     public void createReservation(@RequestBody ReservationFormDto formDto) {
+        Restaurant foundRestaurant =null;
         Reservation rv = new Reservation();
+        Restaurant rs = new Restaurant();
+        Optional<Restaurant> restaurant = restaurantRepository.findById(formDto.getId());
+        if (restaurant.isPresent()) {
+            foundRestaurant = restaurant.get();
+        }
+
 
         int year = formDto.getYear();
         int month = formDto.getMonth();
@@ -95,13 +105,20 @@ public class ReservationService {
         // LocalDateTime을 java.util.Date로 변환
         Date date = Date.from(parsedDatetime.atZone(ZoneId.systemDefault()).toInstant());
         //rv.setM_id(); 세션추가되면 삽입
-        rv.setRsid(formDto.getId());
+        rv.setRsId(formDto.getId());
         rv.setCreate_date(date);
         rv.setReservation_status(1);
         rv.setRequest(formDto.getInputValue());
         rv.setPeople(formDto.getCount());
+        rv.setRe_restaurant(foundRestaurant);
         reservationRepository.save(rv);
     }
+
+    public List<findReDto> findReservations(int memberId){
+        List<findReDto> reservations = repository.findReservations(memberId);
+        return repository.findReservations(memberId);
+    }
+
 
 
 

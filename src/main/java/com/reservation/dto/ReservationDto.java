@@ -1,15 +1,11 @@
 package com.reservation.dto;
 
-import com.reservation.constant.ReservationStatus;
-import com.reservation.entity.Member;
-import com.reservation.entity.Restaurant;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Data
-public class Reservation {
+public class ReservationDto {
 
     private int re_id;
     private int m_id;

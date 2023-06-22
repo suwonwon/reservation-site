@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class ReservationFormDto {
 
+    //시간조회dto
+
     private int id;
     private int year;
     private int month;

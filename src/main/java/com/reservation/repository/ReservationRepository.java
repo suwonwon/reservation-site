@@ -10,12 +10,12 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
-    List<Reservation> findAll();
+    List<Reservation> findByRsId(int Rs_id);
 
-    List<Reservation> findByRsid(int Rs_id);
+    @Query("SELECT e.create_date FROM Reservation e WHERE e.create_date = :datetime AND e.rsId = :id")
+    String findTime(@Param("datetime") Date datetime, @Param("id") int id);
 
-    @Query("SELECT e.create_date FROM Reservation e WHERE e.create_date = :datetime AND e.rsid = :id")
-    String executeQuery(@Param("datetime") Date datetime, @Param("id") int id);
+
 
 
 

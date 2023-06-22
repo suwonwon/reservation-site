@@ -61,53 +61,52 @@
   <div class="container">
     <div class="row justify-content-between">
       <div class="col-lg-7">
-        <h1>예약 내역</h1>
-        <table>
+        <h1>예약 리스트</h1>
+        <table class="table table-striped">
+          <thead>
           <tr>
-            <th>레스토랑 ID</th>
-            <th>생성일자</th>
+            <th>음식점이름</th>
             <th>요청사항</th>
             <th>인원</th>
-            <th>예약 상태</th>
+            <th>예약시간</th>
           </tr>
-          <!-- 반복문을 통해 예약 내역을 출력 -->
-          <!-- reservations 변수는 예약 내역을 담고 있는 리스트로 가정 -->
-          <!-- 각 예약 객체의 필드에 접근하여 값을 출력 -->
-          <!-- 예약 내역이 없을 경우, 해당 부분을 조건문으로 처리할 수도 있습니다 -->
-          <!-- 예: if (reservations.isEmpty()) { ... } -->
+          </thead>
+          <tbody>
+          <!-- 예약 리스트를 동적으로 생성해야 함 -->
+          <!-- 예약 데이터를 백엔드에서 가져와서 아래와 같이 반복하여 템플릿에 반영해야 함 -->
           <th:block th:each="reservation : ${reservations}">
             <tr>
-              <td th:text="${reservation.re_id}"></td>
-              <td th:text="${reservation.mId}"></td>
-              <td th:text="${reservation.rsId}"></td>
+              <td th:text="${reservation.rs_name}"></td>
               <td th:text="${reservation.request}"></td>
               <td th:text="${reservation.people}"></td>
               <td th:text="${reservation.create_date}"></td>
-              <td th:text="${reservation.reservation_status}"></td>
+
             </tr>
           </th:block>
+          <!-- 반복 끝 -->
+          </tbody>
         </table>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="footer" th:replace="layouts/footer.html :: footer"></div> <!-- 푸터-->
-<!-- /.site-footer -->
+  <div id="footer" th:replace="layouts/footer.html :: footer"></div> <!-- 푸터-->
+  <!-- /.site-footer -->
 
-<!-- Preloader -->
-<div id="overlayer"></div>
-<div class="loader">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
+  <!-- Preloader -->
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
-</div>
 
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/tiny-slider.js"></script>
-<script src="/js/aos.js"></script>
-<script src="/js/navbar.js"></script>
-<script src="/js/counter.js"></script>
-<script src="/js/custom.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/tiny-slider.js"></script>
+  <script src="/js/aos.js"></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/counter.js"></script>
+  <script src="/js/custom.js"></script>
 
-  </body>
+</body>
 </html>

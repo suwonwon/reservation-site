@@ -12,7 +12,8 @@ import java.util.List;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rs_id;
+    @Column(name = "rs_id")
+    private int rsId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member rs_member;
