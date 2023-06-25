@@ -11,10 +11,10 @@ import java.util.List;
 @Table(name = "restaurant")
 public class Restaurant {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int rs_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Member rs_member;
 
     @OneToMany(mappedBy = "re_restaurant")
@@ -33,6 +33,7 @@ public class Restaurant {
     private String rs_name;
     private String address;
     private String rs_num;
+    @Enumerated(EnumType.STRING)
     private Category category;
     private String introduction;
     private String rs_info;

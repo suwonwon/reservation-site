@@ -13,7 +13,13 @@ import java.util.Optional;
 @Transactional
 public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
+
+    public Restaurant save(Restaurant restaurant) {
+        return restaurantRepository.save(restaurant);
+    }
     public Optional<Restaurant> findById(int id) {
         return restaurantRepository.findById(id);
     }
+
+
 }
