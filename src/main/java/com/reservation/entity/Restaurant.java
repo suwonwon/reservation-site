@@ -29,8 +29,9 @@ public class Restaurant {
     @OneToMany(mappedBy = "rs_id")
     private List<Image> rs_img;
 
+    @Column(name = "rs_name")
+    private String rsName; //rs_name에서 고침
 
-    private String rs_name;
     private String address;
     private String rs_num;
     @Enumerated(EnumType.STRING)

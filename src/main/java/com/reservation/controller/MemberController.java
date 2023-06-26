@@ -63,7 +63,7 @@ public class MemberController {
         restaurant1.setRs_img(restaurant.getRs_img());
         restaurant1.setRs_info(restaurant.getRs_info());
         restaurant1.setIntroduction(restaurant.getIntroduction());
-        restaurant1.setRs_name(restaurant.getRs_name());
+        restaurant1.setRsName(restaurant.getRsName());
         restaurantService.save(restaurant1);
         return "redirect:/";
     }

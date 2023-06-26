@@ -19,7 +19,7 @@ public class RestaurantRepositoryCustomImpl implements RestaurantRepositoryCusto
     private JPAQueryFactory queryFactory;
     private BooleanExpression RestaurantNmLike(String searchQuery){ //검색어가 null이 아니면 상품명에 해당검색어가 포함되는 상품을 조회하는조건 반환함
         return StringUtils.isEmpty(searchQuery) ?
-                null : QRestaurant.restaurant.rs_name.like("%" + searchQuery + "%");
+                null : QRestaurant.restaurant.rsName.like("%" + searchQuery + "%");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class RestaurantRepositoryCustomImpl implements RestaurantRepositoryCusto
                 .select(
                         new QMainRestaurantDto(
                                 restaurant.rs_id,
-                                restaurant.rs_name,
+                                restaurant.rsName,
                                 restaurant.address,
                                 restaurant.introduction,
                                 image.img_ad)
