@@ -48,7 +48,7 @@
     <div class="row justify-content-center align-items-center">
       <div class="col-lg-9 text-center mt-5">
         <h1 class="heading" data-aos="fade-up">
-          새로운거 작성1
+          예약내역
         </h1>
       </div>
     </div>
@@ -80,10 +80,16 @@
               <td th:text="${reservation.request}"></td>
               <td th:text="${reservation.people}"></td>
               <td th:text="${reservation.create_date}"></td>
+              <td th:text="${reservation.re_id}"></td>
+              <td>
+                <div class="buttonContainer" th:data-re_id="${reservation.re_id}">
+                  <button class="cancelButton" th:if="${reservation.create_date > #dates.createNow()}">예약취소</button>
+                </div>
+              </td>
 
             </tr>
           </th:block>
-          <!-- 반복 끝 -->
+
           </tbody>
         </table>
       </div>
@@ -100,6 +106,44 @@
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
+
+  <script th:inline="javascript">
+  var buttons = document.querySelectorAll('.cancelButton');
+  buttons.forEach(function(button) {
+    var container = button.parentNode;
+    var re_id = container.dataset.re_id;
+    button.addEventListener('click', function() {
+      var confirmed = confirm('예약을 취소하시겠습니까?');
+      if (confirmed) {
+        console.log('예약 취소 버튼 클릭 - re_id:', re_id);
+
+        // Ajax 통신
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/reservation/cancel?re_id=' + re_id, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Ajax 요청이 성공적으로 완료되었을 때의 처리
+              var response = xhr.responseText;
+              console.log('서버 응답:', response);
+              // 추가적인 로직 수행
+              location.reload();
+            } else {
+              // Ajax 요청이 실패했을 때의 처리
+              console.error('Ajax 요청 실패:', xhr.status);
+              // 실패 처리 로직 수행
+            }
+          }
+        };
+        xhr.send();
+      }
+    });
+  });
+</script>
+
+
 
   <script src="/js/bootstrap.bundle.min.js"></script>
   <script src="/js/tiny-slider.js"></script>

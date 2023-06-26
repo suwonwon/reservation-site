@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class findReDto {
 
+    int re_id;
     Date create_date;
     String people;
     String request;

@@ -1,18 +1,15 @@
 package com.reservation.controller;
 
-import com.querydsl.core.Tuple;
 import com.reservation.dto.DateDto;
-import com.reservation.dto.ReservationDto;
 import com.reservation.dto.ReservationFormDto;
 import com.reservation.dto.findReDto;
-import com.reservation.entity.Reservation;
+import com.reservation.entity.Restaurant;
 import com.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,9 +20,12 @@ public class ReservationController {
 
 
     //예약페이지로가기
-    @RequestMapping(value ="restaurant/{id}/reservation.html" ,method = RequestMethod.GET)
-    public String Home(Model model,@PathVariable int id){
-        model.addAttribute("id" , id);
+    @RequestMapping(value ="restaurant/{rsId}/reservation.html" ,method = RequestMethod.GET)
+    public String Home(Model model,@PathVariable int rsId){
+        Restaurant restaurant = reservationService.findRestaurant(rsId);
+        System.out.println("asd"+restaurant);
+        model.addAttribute("id" , rsId);
+        model.addAttribute("restaurant",restaurant);
         return "reservation";
     }
 
@@ -53,8 +53,22 @@ public class ReservationController {
     public String findReservations(Model model,@PathVariable("memberId") int memberId ){
 
         List<findReDto> reservations = reservationService.findReservations(memberId);
+        String currentTime = reservationService.getCurrentTime();
+
+        model.addAttribute("currentTime",currentTime);
         model.addAttribute("reservations",reservations);
 
         return "reservation-details";
+    }
+
+    @GetMapping("/reservation/cancel")
+    @ResponseBody
+    public int statusReservation(@RequestParam("re_id") int re_id){
+        //예약상태=0; 예약취소상태=1;
+        int status = reservationService.statusReservation(re_id);
+
+
+        return status;
+
     }
 }

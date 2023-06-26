@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
   <head>
@@ -124,6 +123,9 @@
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-lg-7">
+            <div th:text="${restaurant.rs_name}"></div>
+            <div th:text="${restaurant.address}"></div>
+            <div th:text="${restaurant.introduction}"></div>
             <!-- 달력 -->
             <table class="Calendar">
               <thead>
@@ -154,12 +156,6 @@
                 <button id="decreaseBtn">-</button>
                 <span id="personCount">1</span>
                 <button id="increaseBtn">+</button>
-                <script th:inline = "javascript">
-
-
-
-
-                </script>
             </div>
           </div>
           <div class="col-lg-4">
