@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
 <nav class="site-nav" th:fragment="nav">
     <div class="container">
         <div class="menu-bg-wrap">
@@ -15,8 +18,10 @@
                     <li class="has-children">
                         <a href="properties.html">회원</a>
                         <ul class="dropdown">
-                            <li><a href="#">로그인</a></li>
-                            <li><a href="#">마이페이지</a></li>
+                            <li sec:authroize="isAnonymous()"><a th:href="@{/member/join/person}">회원가입</a></li>
+                            <li sec:authroize="isAnonymous()"><a th:href="@{/member/login}" sec:authroize="isAnonymous()">로그인</a></li>
+                            <li sec:authroize="isAuthenticated()"><a th:href="@{/member/logout}" sec:authroize="isAuthenticated()">로그아웃</a></li>
+                            <li sec:authroize="isAuthenticated()"><a th:href="@{/mypage}" sec:authroize="isAuthenticated()">마이페이지</a></li>
                             <li><a href="#">공지사항</a></li>
                         </ul>
                     </li>
@@ -35,3 +40,4 @@
         </div>
     </div>
 </nav>
+</html>

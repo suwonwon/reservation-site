@@ -18,7 +18,7 @@ public class Reservation {
     @Column(name = "rs_id")
     private int rsid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Member re_member;
 
     @ManyToOne(fetch = FetchType.LAZY)

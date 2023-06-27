@@ -5,6 +5,10 @@ import com.reservation.entity.Member;
 import com.reservation.repository.MemberRepository;
 import com.reservation.repository.MemberRepositoryImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +24,8 @@ public class MemberService {
     private final MemberRepositoryImpl memberRepositoryImpl;
 
     public Member save(Member member) {
-        if (memberRepositoryImpl.findMemberForDuplicate(member.getId()) == true) {
-            return memberRepository.save(member);
-        } else {
-            return null;
-        }
+        memberRepository.save(member);
+        return member;
     }
 
     public Optional<Member> findById(int id) {
@@ -38,6 +39,5 @@ public class MemberService {
     public List<Member> findMembers(MemberSearchCond memberSearchCond) {
         return memberRepositoryImpl.findAll(memberSearchCond);
     }
-
 
 }
