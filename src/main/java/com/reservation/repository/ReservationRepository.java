@@ -12,7 +12,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     List<Reservation> findByRsId(int Rs_id);
 
-    @Query("SELECT e.create_date FROM Reservation e WHERE e.create_date = :datetime AND e.rsId = :id")
+    @Query("SELECT e.create_date FROM Reservation e WHERE e.create_date = :datetime AND e.rsId = :id and e.reservation_status = 1")
     String findTime(@Param("datetime") Date datetime, @Param("id") int id);
 
 

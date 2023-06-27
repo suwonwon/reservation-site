@@ -47,27 +47,10 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-9 text-center mt-5">
             <h1 class="heading" data-aos="fade-up">
-              5232 California AVE. 21BC
+              예약페이지
             </h1>
 
-            <nav
-              aria-label="breadcrumb"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <ol class="breadcrumb text-center justify-content-center">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">
-                  <a href="properties.html">Properties</a>
-                </li>
-                <li
-                  class="breadcrumb-item active text-white-50"
-                  aria-current="page"
-                >
-                  5232 California AVE. 21BC
-                </li>
-              </ol>
-            </nav>
+
           </div>
         </div>
       </div>
@@ -121,12 +104,9 @@
 
     <div class="section">
       <div class="container">
+        <div style="margin-left:200px;" id="dataContainer"></div>
         <div class="row justify-content-between">
           <div class="col-lg-7">
-            <div th:text="${restaurant.rs_name}"></div>
-            <div th:text="${restaurant.address}"></div>
-            <div th:text="${restaurant.introduction}"></div>
-            <!-- 달력 -->
             <table class="Calendar">
               <thead>
               <tr>
@@ -150,20 +130,46 @@
               <tbody>
               </tbody>
             </table>
-              <div id="dataContainer"></div>
-              <div id="buttonContainer"></div>
-              <div class="counter">
-                <button id="decreaseBtn">-</button>
-                <span id="personCount">1</span>
-                <button id="increaseBtn">+</button>
+            <div>
+
+              <div style="margin-left:200px;" id="buttonContainer"></div>
+
             </div>
           </div>
           <div class="col-lg-4">
-              <h1>요청사항</h1>
-              <!-- 컨트롤러에서 넘어온값 -->
-              <textarea id = "text" style="width: 400px; height: 100px;"></textarea>
-              <button id="reserveButton" style="width: 400px; height: 100px;">예약하기</button>
+            <img id="imgId" th:src="${image.img_ad}" alt="첨부이미지" th:if="${image.img_ad != null}">
+            <table>
+              <tr>
+                <h3>정보</h3>
+              </tr>
+
+              <tr>
+                <td >이름:</td>
+                <td th:text="${restaurant.rs_name}"></td>
+              </tr>
+              <tr>
+                <td >위치:</td>
+                <td th:text="${restaurant.address}"></td>
+              </tr>
+              <tr>
+                <td >소개:</td>
+                <td th:text="${restaurant.introduction}"></td>
+              </tr>
+            </table>
+            <div class="counter">
+              <h3>인원수</h3>
+              <button id="decreaseBtn">-</button>
+              <span id="personCount">1</span>
+              <button id="increaseBtn">+</button>
+            </div>
           </div>
+              <h1 style="margin-left:200px;">요청사항</h1>
+              <!-- 컨트롤러에서 넘어온값 -->
+              <textarea id = "text" style="width: 600px; height: 80px; margin-left:200px; "></textarea>
+              <button id="reserveButton" style="width: 400px; height: 80px;">예약하기</button>
+          </div>
+          <div>
+
         </div>
       </div>
     </div>

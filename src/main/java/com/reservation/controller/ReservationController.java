@@ -3,6 +3,7 @@ package com.reservation.controller;
 import com.reservation.dto.DateDto;
 import com.reservation.dto.ReservationFormDto;
 import com.reservation.dto.findReDto;
+import com.reservation.entity.Image;
 import com.reservation.entity.Restaurant;
 import com.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,10 @@ public class ReservationController {
     @RequestMapping(value ="restaurant/{rsId}/reservation.html" ,method = RequestMethod.GET)
     public String Home(Model model,@PathVariable int rsId){
         Restaurant restaurant = reservationService.findRestaurant(rsId);
-        System.out.println("asd"+restaurant);
+        Image image = reservationService.findImage(restaurant);
         model.addAttribute("id" , rsId);
         model.addAttribute("restaurant",restaurant);
+        model.addAttribute("image",image);
         return "reservation";
     }
 
@@ -64,10 +66,8 @@ public class ReservationController {
     @GetMapping("/reservation/cancel")
     @ResponseBody
     public int statusReservation(@RequestParam("re_id") int re_id){
-        //예약상태=0; 예약취소상태=1;
+        //예약상태=1; 예약취소상태=0;
         int status = reservationService.statusReservation(re_id);
-
-
         return status;
 
     }

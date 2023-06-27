@@ -3,6 +3,8 @@ package com.reservation.service;
 import com.reservation.dto.DateDto;
 import com.reservation.dto.ReservationFormDto;
 import com.reservation.dto.findReDto;
+import com.reservation.dto.findRsImg;
+import com.reservation.entity.Image;
 import com.reservation.entity.Reservation;
 import com.reservation.entity.Restaurant;
 import com.reservation.repository.ReservationRepository;
@@ -33,7 +35,19 @@ public class ReservationService {
     //식당조회
     public Restaurant findRestaurant(int rsId){
         Restaurant restaurant = repository.findRestaurant(rsId);
+        com.reservation.dto.Restaurant restaurant2 = new com.reservation.dto.Restaurant();
+        restaurant2.setRs_id(restaurant.getRsId());
+        restaurant2.setRs_name(restaurant2.getRs_name());
+        restaurant2.setAddress(restaurant2.getAddress());
+        restaurant2.setCategory(restaurant2.getAddress());
+        restaurant2.setRs_info(restaurant2.getRs_info());
+        restaurant2.setIntroduction(restaurant2.getIntroduction());
+        restaurant2.setRs_num(restaurant2.getRs_num());
         return restaurant;
+    }
+    public Image findImage(Restaurant restaurant){
+        Image image = repository.findImage(restaurant);
+        return image;
     }
 
     //넘어온 식당id를 가지고 해당날짜와 시간대에 예약이있나 확인하는 서비스
@@ -76,6 +90,7 @@ public class ReservationService {
         Date date = Date.from(parsedDatetime.atZone(ZoneId.systemDefault()).toInstant());
 
         String result = reservationRepository.findTime(date,id);
+        System.out.println("asd"+result);
 
         if (result!=null){
             status=1;
@@ -116,7 +131,7 @@ public class ReservationService {
         rv.setReservation_status(1);
         rv.setRequest(formDto.getInputValue());
         rv.setPeople(formDto.getCount());
-        rv.setReservation_status(0);
+        rv.setReservation_status(1);
         rv.setRe_restaurant(foundRestaurant);
         reservationRepository.save(rv);
     }

@@ -80,7 +80,6 @@
               <td th:text="${reservation.request}"></td>
               <td th:text="${reservation.people}"></td>
               <td th:text="${reservation.create_date}"></td>
-              <td th:text="${reservation.re_id}"></td>
               <td>
                 <div class="buttonContainer" th:data-re_id="${reservation.re_id}">
                   <button class="cancelButton" th:if="${reservation.create_date > #dates.createNow()}">예약취소</button>
