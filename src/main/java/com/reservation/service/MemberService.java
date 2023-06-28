@@ -39,5 +39,12 @@ public class MemberService {
         return memberRepositoryImpl.findAll(memberSearchCond);
     }
 
+    private void validateDuplicateMember(Member member){
+        Member findMember = memberRepository.findByEmail(member.getE_mail());
+        if(findMember !=null){
+            throw new IllegalStateException("이미 가입된 회원입니다.");
+        }
+    }
+
 
 }

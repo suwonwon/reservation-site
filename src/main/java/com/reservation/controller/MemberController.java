@@ -1,20 +1,20 @@
 package com.reservation.controller;
 
 
+import com.reservation.dto.MemberFormDto;
 import com.reservation.entity.Member;
 import com.reservation.entity.Restaurant;
 import com.reservation.service.MemberService;
 import com.reservation.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor
@@ -66,6 +66,12 @@ public class MemberController {
         restaurant1.setRs_name(restaurant.getRs_name());
         restaurantService.save(restaurant1);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/new")
+    public String memberForm(Model model){
+        model.addAttribute("memberFormDto", new MemberFormDto());
+        return "member/memberForm";
     }
 
 
