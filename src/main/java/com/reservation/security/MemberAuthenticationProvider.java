@@ -28,7 +28,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
             throw new BadCredentialsException("BadCredentialsException");
         }
 
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(accountContext.getMember(), null, accountContext.getAuthorities());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(accountContext.getUsername(), null, accountContext.getAuthorities());
 
 
         return authenticationToken;

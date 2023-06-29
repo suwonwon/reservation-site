@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <nav class="site-nav" th:fragment="nav">
     <div class="container">
         <div class="menu-bg-wrap">
@@ -16,17 +16,15 @@
                     <li><a href="about.html">HOT한식당</a></li>
                     <li><a href="contact.html">커뮤니티</a></li>
                     <li class="has-children">
-                        <a href="properties.html">회원</a>
+                        <a href="#">회원</a>
                         <ul class="dropdown">
-                            <li sec:authroize="isAnonymous()"><a th:href="@{/member/join/person}">회원가입</a></li>
-                            <li sec:authroize="isAnonymous()"><a th:href="@{/member/login}" sec:authroize="isAnonymous()">로그인</a></li>
-                            <li sec:authroize="isAuthenticated()"><a th:href="@{/member/logout}" sec:authroize="isAuthenticated()">로그아웃</a></li>
-                            <li sec:authroize="isAuthenticated()"><a th:href="@{/mypage}" sec:authroize="isAuthenticated()">마이페이지</a></li>
+                            <li sec:authorize="isAnonymous()"><a th:href="@{/member/join/person}">회원가입</a></li>
+                            <li sec:authorize="isAnonymous()"><a th:href="@{/member/login}" sec:authorize="isAnonymous()">로그인</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/member/logout}" sec:authorize="isAuthenticated()">로그아웃</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/mypage}" sec:authorize="isAuthenticated()">마이페이지</a></li>
                             <li><a href="#">공지사항</a></li>
                         </ul>
                     </li>
-                </ul>
-                </li>
                 </ul>
                 <a
                         href="#"

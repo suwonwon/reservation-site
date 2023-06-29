@@ -30,7 +30,10 @@
         <tbody>
         <tr th:each="review : ${reviews}">
             <td style="width: 60%" th:text="${review.contents}">리뷰</td>
-<!--            <td th:text="${review.m_id.getName()}">작성자</td>-->
+            <td th:if="${review.m_id != null}" th:text="${review.m_id.id}">작성자</td>
+            <td th:unless="${review.m_id!= null}">Unknown</td>
+<!--            <td th:if="${review.rs_id != null}" th:text="${review.rs_id}">레스토랑</td>-->
+<!--            <td th:unless="${review.rs_id != null}">Unknown</td>-->
             <td th:text="${review.getScope()}">별점</td>
         </tr>
         </tbody>
