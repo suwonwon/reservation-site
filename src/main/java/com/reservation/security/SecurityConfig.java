@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception { // 5
         http
                 .authorizeRequests() // 6
-                .antMatchers("/","/fonts/**","/scss/**", "/member/login", "/member/join/**", "/member/idfindview", "member/pwsfindview").permitAll() // 누구나 접근 허용
+                .antMatchers("/","/fonts/**","/scss/**", "/member/login", "/member/join/**", "/member/idfindview", "member/pwsfindview", "/error").permitAll() // 누구나 접근 허용
                 .antMatchers("/member/logout", "member/withdrawal/**", "mypage/**").hasRole("USER")
                 .antMatchers("/member/logout", "member/withdrawal/**", "mypage/**").hasRole("OWNER")// USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
