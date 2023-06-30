@@ -12,12 +12,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
+import com.querydsl.core.types.dsl.Wildcard;
 
 import java.util.List;
 
 public class RestaurantRepositoryCustomImpl implements RestaurantRepositoryCustom{ //283
     private JPAQueryFactory queryFactory;
-    private BooleanExpression RestaurantNmLike(String searchQuery){ //검색어가 null이 아니면 상품명에 해당검색어가 포함되는 상품을 조회하는조건 반환함
+    private BooleanExpression restaurantNmLike(String searchQuery){ //검색어가 null이 아니면 상품명에 해당검색어가 포함되는 상품을 조회하는조건 반환함
         return StringUtils.isEmpty(searchQuery) ?
                 null : QRestaurant.restaurant.rsName.like("%" + searchQuery + "%");
     }
@@ -28,7 +29,7 @@ public class RestaurantRepositoryCustomImpl implements RestaurantRepositoryCusto
         QRestaurant restaurant = QRestaurant.restaurant;
         QImage image = QImage.image;
 
-        QueryResults<MainRestaurantDto> results = queryFactory
+        List<MainRestaurantDto> content = queryFactory
                 .select(
                         new QMainRestaurantDto(
                                 restaurant.rs_id,
@@ -40,14 +41,21 @@ public class RestaurantRepositoryCustomImpl implements RestaurantRepositoryCusto
                 .from(image)
                 .join(image.restaurant, restaurant)
                 .where(image.repImgYn.eq("Y"))
-                .where(RestaurantNmLike(restaurantSearchDto.getSearchQuery()))
+                .where(restaurantNmLike(restaurantSearchDto.getSearchQuery()))
                 .orderBy(restaurant.rs_id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .fetchResults();
+                .fetch();
 
-        List<MainRestaurantDto> content = results.getResults();
-        long total = results.getTotal();
+        long total = queryFactory
+                .select(Wildcard.count)
+                .from(image)
+                .join(image.restaurant, restaurant)
+                .where(image.repImgYn.eq("Y"))
+                .where(restaurantNmLike(restaurantSearchDto.getSearchQuery()))
+                .fetchOne()
+                ;
+
         return new PageImpl<>(content, pageable, total);
 
     }
