@@ -33,10 +33,13 @@ public class Member {
     private List<Comment> m_comment;
 
 
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
     private String password;
+
+    @Column(unique = true)
     private String name;
     private String number;
     private String e_mail;
