@@ -40,7 +40,7 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member){
-        Member findMember = memberRepository.findByEmail(member.getE_mail());
+        Member findMember = memberRepository.findByEmail(member.getEmail());
         if(findMember !=null){
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }

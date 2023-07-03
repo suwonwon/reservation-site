@@ -33,8 +33,6 @@ public class Member {
     private List<Comment> m_comment;
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     private String password;
@@ -42,7 +40,7 @@ public class Member {
     @Column(unique = true)
     private String name;
     private String number;
-    private String e_mail;
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private Role role;

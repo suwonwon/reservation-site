@@ -55,7 +55,7 @@ public class MemberController {
         member1.setId(member.getPassword());
         member1.setPassword(member.getPassword());
         member1.setName(member.getName());
-        member1.setE_mail(member.getE_mail());
+        member1.setEmail(member.getEmail());
         Restaurant restaurant1 = new Restaurant();
         restaurant1.setRs_member(member1);
         restaurant1.setCategory(restaurant.getCategory());
@@ -66,6 +66,7 @@ public class MemberController {
         restaurant1.setRs_name(restaurant.getRs_name());
         restaurantService.save(restaurant1);
         return "redirect:/";
+
     }
 
     @GetMapping(value = "/new")
